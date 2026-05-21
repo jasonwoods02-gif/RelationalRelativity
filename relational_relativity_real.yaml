@@ -1,0 +1,50 @@
+output: rr_real_chains
+debug: True
+
+packages_path: /root/cobaya_packages
+
+params:
+  ombh2: 0.0224
+  omch2: 0.12
+  theta_mc: 0.0104
+  tau: 0.054
+  As: 2.1e-9
+  ns: 0.965
+  A_planck:
+    prior:
+      min: 0.9
+      max: 1.1
+    ref:
+      loc: 1.0
+    proposal: 0.002
+  beta:
+    prior:
+      min: 0.4
+      max: 0.6
+    ref:
+      loc: 0.52
+    proposal: 0.008
+  phi0:
+    prior:
+      min: 0.04
+      max: 0.06
+    ref:
+      loc: 0.05
+    proposal: 0.004
+
+theory:
+  camb: {}
+
+  relational_theory.RelationalRelativity:
+    python_path: .
+
+likelihood:
+  planck_2018_lowl.TT: {}
+  planck_2018_highl_plik.TT_lite: {}
+  bao.desi_dr2: {}
+
+sampler:
+  mcmc:
+    Rminus1_stop: 0.15
+    max_tries: 50000
+    proposal_scale: 1.0
