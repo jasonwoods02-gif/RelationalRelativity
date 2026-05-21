@@ -1,0 +1,34 @@
+output: rr_chains
+debug: True
+
+params:
+  beta:
+    prior:
+      min: 0.4
+      max: 0.6
+    ref:
+      loc: 0.52
+    proposal: 0.01
+  phi0:
+    prior:
+      min: 0.04
+      max: 0.06
+    ref:
+      loc: 0.05
+    proposal: 0.005
+
+theory:
+  relational_theory.RelationalRelativity:
+    python_path: .
+
+likelihood:
+  gaussian:
+    mean: [-0.87, -0.60]
+    cov: [[0.0025, 0.0],
+          [0.0,   0.0225]]
+
+sampler:
+  mcmc:
+    Rminus1_stop: 0.001
+    max_tries: 500000
+    proposal_scale: 1.0
